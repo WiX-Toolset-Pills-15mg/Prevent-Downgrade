@@ -1,0 +1,9 @@
+Version 2.0.0.0
+
+<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+
+----------------------------------------------------------------------------------------------------
+
+Version 1.0.0.0
+
+<MajorUpgrade AllowDowngrades="yes" />

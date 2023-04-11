@@ -1,0 +1,1 @@
+msiexec /x PreventDowngrade.msi /l*vx uninstall.log

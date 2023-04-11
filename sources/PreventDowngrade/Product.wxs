@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+WiX Toolset Pills 15mg
+Copyright (C) 2019-2022 Dust in the Wind
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<!--
+====================================================================================================
+START: Overview
+====================================================================================================
+
+This project demonstrates how to prevent the installation of the product if a newer version is
+already installed.
+
+Actually, the downgrade is, be default not accepted and the WiX project template already includes
+support for preventing the downgrade, by providing a custom error message.
+
+Let's see how it works.
+
+NEXT: Product.wxs (DOWN)
+
+-->
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+    <Product
+        Id="*"
+        Name="Prevent Downgrade - WiX Toolset Pill"
+        Language="1033"
+        Version="1.0.0.0"
+        Manufacturer="Dust in the Wind"
+        UpgradeCode="ba2d7cd0-d4c8-44d0-a5d8-0afd97d644c3">
+
+        <Package
+            InstallerVersion="200"
+            Compressed="yes"
+            InstallScope="perMachine" />
+
+        <!--
+        ====================================================================================================
+        Step 1: Update the "DowngradeErrorMessage" attribute
+        ====================================================================================================
+        
+        - "MajorUpgrade" tag
+        Adds support for major upgrade. If it is removed. The current version of the product will be
+        installed alongside other versions that may already exist in the system.
+        
+        - "AllowDowngrades" attribute
+        Activates the downgrade support. If it is missing, its value is considered to be "no".
+        
+        - "DowngradeErrorMessage" attribute
+        Mandatory if "AllowDowngrades" is "no".
+        Provides a message to be displayed if a downgrade is detected.
+        
+        NEXT: Product.wxs (DOWN)
+        -->
+
+        <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+        <MediaTemplate />
+
+        <!--<MajorUpgrade AllowDowngrades="yes" />-->
+
+        <Feature
+            Id="ProductFeature"
+            Title="Prevent Downgrade"
+            Level="1">
+
+            <ComponentGroupRef Id="ProductComponents" />
+        </Feature>
+
+    </Product>
+
+</Wix>
+
+<!--
+====================================================================================================
+Step 2: Build two different versions
+====================================================================================================
+
+Set the "Product@Version = 1.0.0.0" and build.
+Keep the results in a directory called "Downgrade v1.0.0.0".
+
+Set the "Product@Version = 2.0.0.0" and build.
+Keep the results in a directory called "Downgrade v2.0.0.0".
+
+NEXT: install.bat
+-->

@@ -1,0 +1,8 @@
+﻿WiX Toolset Pills 15mg - Prevent Downgrade
+====================================================================================================
+
+This file is part of the "Prevent Downgrade" pill.
+The pill demonstrates how to prevent the installation of the product if a newer version is already installed.
+
+For more details please chech the GitHub repository:
+https://github.com/WiX-Toolset-Pills-15mg/Prevent-Downgrade
